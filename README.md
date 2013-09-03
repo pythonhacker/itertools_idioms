@@ -24,7 +24,27 @@ Usage:
     >>> constraints = {'cake': ('<', 60), 'bread': ('<=', 20), 'pie': ('<', 80)}
     >>> list(idioms.select(prices,constraints, use_operator=True))
     ['cake', 'bread']
+
+    # Use select2 if the conditions are directly expressed as functions
+    >>> constraints = {'cake': lambda x: x<60,
+    ...                'bread': lambda x: x<=20,
+    ...                'pie': lambda x: x<80 }
+    >>> list(idioms.select2(prices, constraints))
+    ['cake', 'bread']
     
+    # Use 'call' to return iterables from callables which vary
+    # in output when called at different times. Use optional
+    # 'times' and 'filter' arguments to control the output.
+    
+    # Return upto 10 random numbers between 1 and 100
+    >>> list(idioms.call(random.choice, range(10), times=10))
+    [8, 8, 1, 4, 4, 6, 7, 3, 9, 2]
+
+    # Return upto 10 random numbers between 1 and 100 which
+    # are multiples of 3
+    >>> list(idioms.call(random.choice, range(100), times=10, filter=lambda x: x%3==0))
+    [93, 72, 63]
+
     # Random streams - infinite and constrained
     
     # Infinite random stream from your iterable
