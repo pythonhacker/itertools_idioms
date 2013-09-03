@@ -1,6 +1,6 @@
 # -- coding: utf-8
 
-""" Idioms using itertools functions. 
+""" Useful idioms by composing itertools functions.
 
     License: BSD3 (See LICENSE file)
 """
@@ -110,7 +110,7 @@ def select2(subjects, constraints):
 
 def call(callable, *args, **kwargs):
     """ Call a callable with arguments 'args' a given number
-    of times. If optional times argument is not passed, returns
+    of times. If optional 'times' argument is not passed, returns
     an infinite iterator on the callable with arguments.
 
     The optional 'filter' argument can be used to pass
