@@ -14,8 +14,13 @@ Usage:
     >>> list(idioms.select(prices,constraints))
     ['cake', 'bread']
 
-    # another option - use default operator module mapping
-    # for constraints.
+    # second option - supply your own constraing mapping to functions
+    >>> constraints = {'cake': ('less', 60), 'bread': ('less', 30), 'pie': ('lessorequal', 80)}
+    >>> cmap = {'less': operator.lt, 'lessorequal': operator.le}
+    >>> list(idioms.select(prices,constraints, cmap=cmap))  
+    ['cake', 'bread']
+
+    # best option - use default operator module mapping for comparison constraints.
     >>> constraints = {'cake': ('<', 60), 'bread': ('<=', 20), 'pie': ('<', 80)}
     >>> list(idioms.select(prices,constraints, use_operator=True))
     ['cake', 'bread']
