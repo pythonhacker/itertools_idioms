@@ -7,12 +7,19 @@ Usage:
 
     >>> from itertools_idioms import idioms
     # Select keys using variable constraints
+
     >>> import operator
     >>> prices = {'cake': 50, 'bread': 20, 'pie': 100}
     >>> constraints = {'cake': (operator.lt, 60), 'bread': (operator.le, 20), 'pie': (operator.lt, 80)}
     >>> list(idioms.select(prices,constraints))
     ['cake', 'bread']
 
+    # another option - use default operator module mapping
+    # for constraints.
+    >>> constraints = {'cake': ('<', 60), 'bread': ('<=', 20), 'pie': ('<', 80)}
+    >>> list(idioms.select(prices,constraints, use_operator=True))
+    ['cake', 'bread']
+    
     # Random streams - infinite and constrained
     
     # Infinite random stream from your iterable
