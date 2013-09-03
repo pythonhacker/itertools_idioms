@@ -46,3 +46,5 @@ Usage:
     >>> list(idioms.random_digits(sentinel=8))
     [4, 2, 3, 2, 9, 5, 9, 3, 7, 7, 5, 5, 3, 5]
 
+    >>> 'More coming soon!'
+    'More coming soon!'
