@@ -66,5 +66,15 @@ Usage:
     >>> list(idioms.random_digits(sentinel=8))
     [4, 2, 3, 2, 9, 5, 9, 3, 7, 7, 5, 5, 3, 5]
 
+    # Flatten nested iterators upto any level
+    >>> list(flatten([1,[2,[3,[4,[5]]]]]))
+    [1, 2, 3, 4, 5]
+    >>> list(flatten([1,[2,3],[4,5]]))
+    [1, 2, 3, 4, 5]
+    >>> list(flatten(dict(enumerate(range(5)))))
+    [0, 1, 2, 3, 4]
+    >>> list(flatten([1,2,'python',{3:4, 4:5}, ['perl']]))    
+    [1, 2, 'python', 3, 4, 'perl']    
+    >>> 
     >>> 'More coming soon!'
     'More coming soon!'
