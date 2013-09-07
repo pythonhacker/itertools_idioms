@@ -148,7 +148,9 @@ def flatten(iterables):
     [1, 2, 3, 4, 5]
     >>> list(flatten(dict(enumerate(range(5)))))
     [0, 1, 2, 3, 4]
-    list(flatten([1,2,'python',{3:4, 4:5}, ['perl']]))
+    >>> list(flatten([1,2,'python',{3:4, 4:5}, ['perl']]))
+    [1, 2, 'python', 3, 4, 'perl']
+    >>> 
     """
     
     for i in itertools.chain(iterables):
