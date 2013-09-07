@@ -131,6 +131,33 @@ def call(callable, *args, **kwargs):
     else:
         return itertools.starmap(callable, itertools.repeat(args, times=times))
 
+def flatten(iterables):
+    """ Return a generating flattening an iterator. In
+    other words, if the iterator contains other iterables,
+    yield items from them till no more iterables are found
+
+    >>> list(flatten(range(5)))
+    [0, 1, 2, 3, 4]
+    >>> list(flatten(['python']))
+    ['python']
+    >>> list(flatten('python'))
+    ['p', 'y', 't', 'h', 'o', 'n']
+    >>> list(flatten([1,[2,[3,[4,[5]]]]]))
+    [1, 2, 3, 4, 5]
+    >>> list(flatten([1,[2,3],[4,5]]))
+    [1, 2, 3, 4, 5]
+    >>> list(flatten(dict(enumerate(range(5)))))
+    [0, 1, 2, 3, 4]
+    list(flatten([1,2,'python',{3:4, 4:5}, ['perl']]))
+    """
+    
+    for i in itertools.chain(iterables):
+        if hasattr(i, '__iter__'):
+            for j in flatten(i): yield j
+        else:
+            yield i
+        
+    
 if __name__ == "__main__":
     import doctest
     doctest.testmod(verbose=True)
