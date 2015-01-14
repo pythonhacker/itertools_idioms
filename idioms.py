@@ -158,7 +158,28 @@ def flatten(iterables):
             for j in flatten(i): yield j
         else:
             yield i
-        
+
+def commonprefix(*instrings):
+    """ Common prefix of input strings using OrderedDict
+
+    >>> commonprefix('Python','Pythonista')
+    'Python'
+    >>> commonprefix('Persia','Person','Perl','Perlite')
+    'Per'
+    >>> commonprefix('Batman', 'Battleship','Batista','Bat')
+    'Bat'
+    
+    """
+    
+    d = collections.OrderedDict()
+    
+    for instring in instrings:
+        for idx,char in enumerate(instring):
+            # Make sure index is added into key
+            d[(char, idx)] = d.get((char,idx), 0) + 1
+
+    # Return prefix of keys where value == length(instrings)
+    return ''.join([k[0] for k in itertools.takewhile(lambda x: d[x] == len(instrings), d)])
     
 if __name__ == "__main__":
     import doctest
