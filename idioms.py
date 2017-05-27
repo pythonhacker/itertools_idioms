@@ -159,6 +159,27 @@ def flatten(iterables):
         else:
             yield i
 
+def flatten_dict(nested):
+    """ Return a generator flattening a nested
+    dictionary.
+
+    >>> nested = {1: {5: {9: [1,2,3]}, 10: []}, 8: {2:3}}
+    >>> list(flatten_dict(nested))
+    [(2, 3), (8, {2: 3}), (10, []), (9, [1, 2, 3]), (5, {9: [1, 2, 3]}), (1, {10: [], 5: {9: [1, 2, 3]}})]
+    >>> nested = {3: {9: {8: {5 : [4,5]}, 12: 'a'}, 21: 8}}
+    >>> list(flatten_dict(nested))
+    [(5, [4, 5]), (8, {5: [4, 5]}), (12, 'a'), (9, {8: {5: [4, 5]}, 12: 'a'}), (21, 8), (3, {9: {8: {5: [4, 5]}, 12: 'a'}, 21: 8})]
+    """
+
+    for k in nested:
+        v = nested[k]
+        if type(v) is dict:
+            for i in flatten_dict(v):
+                yield i
+            yield (k, v)
+        else:
+            yield (k, v)
+            
 def commonprefix(*instrings):
     """ Common prefix of input strings using OrderedDict
 
