@@ -180,19 +180,26 @@ def flatten_dict(nested):
         else:
             yield (k, v)
             
-def commonprefix(*instrings):
+def commonprefix(iterable, ignore_case=False):
     """ Common prefix of input strings using OrderedDict
 
-    >>> commonprefix('Python','Pythonista')
+    >>> commonprefix(['Python','Pythonista'])
     'Python'
-    >>> commonprefix('Persia','Person','Perl','Perlite')
+    >>> commonprefix(('Persia','Person','Perl','Perlite'))
     'Per'
-    >>> commonprefix('Batman', 'Battleship','Batista','Bat')
-    'Bat'
-    
+    >>> commonprefix(['rambo', 'Rambo'], ignore_case=True)
+    'rambo'
     """
     
     d = collections.OrderedDict()
+
+    if isinstance(iterable, collections.Iterable):
+        instrings = iterable
+    else:
+        raise Exception("Only Iterables are allowed as an Input")
+
+    # adjusting input strings according to the ignore_case option
+    instrings = map(str.lower, instrings) if ignore_case else instrings
     
     for instring in instrings:
         for idx,char in enumerate(instring):
